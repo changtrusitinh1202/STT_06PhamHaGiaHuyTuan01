@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Challenge #3</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Car(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    function EV(make, speed, currentBatteryCharge){
+        this.currentBatteryCharge =  currentBatteryCharge;
+        Car.call(this, make, speed);
+        this.chargeTo = function chargeToBattery(chargeTo){
+            this.currentBatteryCharge = chargeTo;
+        }
+        this.accelerate = function accelerate(){
+            this.speed = this.speed - 20;
+            this.currentBatteryCharge = this.currentBatteryCharge - 1;
+            console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.currentBatteryCharge}%`)
+        }
+        
+    }
+
+    let car1 = new EV("BMW", 150, 20);
+   // console.log(car1.currentBatteryCharge);
+   car1.accelerate();
+   car1.chargeTo(90);
+   console.log(car1.currentBatteryCharge)
+</script>
+
+</html>

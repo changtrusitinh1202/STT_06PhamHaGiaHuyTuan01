@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const dogs = [
+        { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+        { weight: 8, curFood: 200, owners: ["Matilda"] },
+        { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
+        { weight: 32, curFood: 340, owners: ["Michael"] },
+      ];
+    dogs.map(element => {
+        element.recommendedFood = element.weight ** 0.75 *28;
+    })
+    console.log(dogs);
+    
+    function findDogsSarah(dogs){
+        findDogsSarah = dogs.find(element => element.owners.some(own => own === "Sarah"));
+        if(findDogsSarah != undefined){
+            if(findDogsSarah.curFood < findDogsSarah.recommendedFood * 0.9)
+                console.log("Chó của Sarah ăn quá trời ít");
+            else if(findDogsSarah.curFood > findDogsSarah.recommendedFood * 0.9)
+                console.log("Chó của Sarah ăn nhiều quá nhiều");
+            else
+                console.log("Chó của Sarah ăn vừa đủ");
+        }
+            
+    }
+
+    var ownersEatTooMuch = [];
+    var ownersEatTooLittle = [];
+    dogs.find(dog => {
+            (dog.curFood > dog.recommendedFood *0.9) ? ownersEatTooMuch.push(dog.owners) : 
+                (dog.curFood <  dog.recommendedFood *0.9) ? ownersEatTooLittle.push(dog.owners) : 0;
+        })
+    findDogsSarah(dogs);
+
+    var ownersEatTooLittle1D = [].concat(...ownersEatTooLittle);
+    var ownersEatTooMuch1D = [].concat(...ownersEatTooMuch); 
+  
+    console.log(ownersEatTooMuch1D.toString().replaceAll(","," and ") + "'s dogs eat too much!");
+    console.log(ownersEatTooLittle1D.toString().replaceAll(","," and ") + "'s dogs eat too little!");
+    
+    // function eatEnough(dogs){
+    //     dogs.some(dog => {
+    //         return dog.curFood === dog.recommendedFood ? true : false;
+    //     })
+    // }
+    var eatTrueEnoughFood = dogs.some(element => element.curFood === element.recommendedFood) //  some trả về true false
+    console.log("Eat True Enough Food: " + eatTrueEnoughFood);
+    
+    var eatEnoughFood = dogs.some(element => element.curFood > element.recommendedFood * 0.9 && element.curFood <  element.recommendedFood * 1.1)
+    console.log("Eat Enough Food: "+ eatEnoughFood);
+    
+    var dogsEatEnoughFood = dogs.filter(dog => dog.curFood > dog.recommendedFood * 0.9 && dog.curFood <  dog.recommendedFood * 1.1)
+    dogsEatEnoughFood.forEach(dog => {
+        console.log(dog);
+    })
+
+    function sortByRecommendedFood(dogs){
+        dogs.sort((dog1, dog2) => {
+            return dog1.recommendedFood - dog2.recommendedFood;
+        })
+    }
+
+    sortByRecommendedFood(dogs);
+    console.log(dogs);
+</script>
+</html>
